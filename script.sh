@@ -56,6 +56,22 @@ while test $# -gt 0; do
                         logs=`echo $1 | sed -e 's/^[^=]*=//g'`
                         shift
                         ;;
+                -i)
+                        shift
+                        if test $# -gt 0; then
+                                image=$1
+                                snapshot=$2
+                        else
+                                echo "no output dir specified"
+                                exit 1
+                        fi
+                        shift
+                        ;;
+                --image*)
+                        image=`echo $1 | sed -e 's/^[^=]*=//g'`
+                        snapshot=$2
+                        shift
+                        ;;
                 *)
                         break
                         ;;
@@ -90,8 +106,7 @@ jsonFile.write(json.dumps(data, indent=4))
 jsonFile.close()
 "
 cd pyrebox
-./pyrebox-i386 -m 8192 -monitor stdio -usb -device usb-tablet -drive file=images/Win7/Win7x32.qcow2,index=0,media=disk,format=qcow2,cache=unsafe -netdev user,id=network0,smb=/samba/ -device rtl8139,netdev=network0 -loadvm alina
-
+$BASEDIR/pyrebox-i386 -monitor stdio -net none -m 256 -usb -device usb-tablet -drive file=$image,index=0,media=disk,format=qcow2,cache=unsafe -vnc 127.0.0.1:0 -loadvm $snapshot
 
 cd ..
 cd py2Graph
