@@ -105,8 +105,17 @@ jsonFile = open('$file', 'w+')
 jsonFile.write(json.dumps(data, indent=4))
 jsonFile.close()
 "
+if [ -z "$snapshot" ]
+then
+    echo hola
+    snapshot=""
+else
+    snapshot="-loadvm $snapshot"
+fi
+
 cd pyrebox
-$BASEDIR/pyrebox-i386 -monitor stdio -net none -m 256 -usb -device usb-tablet -drive file=$image,index=0,media=disk,format=qcow2,cache=unsafe -vnc 127.0.0.1:0 -loadvm $snapshot
+source pyrebox_venv/bin/activate
+$BASEDIR/pyrebox-i386 -m 256 -monitor stdio -usb -device usb-tablet -drive file=$image,index=0,media=disk,format=qcow2,cache=unsafe -netdev user,id=network0,smb=/samba/ -device rtl8139,netdev=network0 ${snapshot}
 
 cd ..
 cd py2Graph
