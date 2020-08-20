@@ -1,7 +1,7 @@
 # WinAPIGraph
 
 `WinAPIGraph` is a program based on neo4j, for the creation of software behavior graphs. 
-`WinAPIGraph` uses the [PyREBox](https://github.com/Cisco-Talos/pyrebox) sandbox to perform a dynamic analysis of the software 
+`WinAPIGraph` uses the PyREBox sandbox to perform a dynamic analysis of the software 
 and to obtain the trace of the API calls made by the software.
 
 Deviare2_db is a widely used database containing the main APIs used by the programs. 
@@ -14,7 +14,7 @@ malware and optionally an address to which the log obtained will be written and 
 will later be used by `WinAPIGraph` to generate the network.
 
 
-### Install
+# Install
 	
 `WinAPIGraph` uses py2neo to connect to the neo4j database, and Sqlite3 
 for communication with the deviare2_db database.
@@ -24,11 +24,12 @@ import py2neo
 import Sqlite3
 ```
 
-### Starting a Graph
+# Starting a Graph
 
 `WinAPIGraph` starts a VM through PyREBox, once all the malware analysis is executed 
 and the VM is closed the process of network creation will start, for this it is necessary 
 to have the neo4j database active. The script can be started through ``start.sh``.
+
 ```
 ---------------------------------
 Usage
@@ -56,8 +57,7 @@ Options:
     -f, --file=PATH  specify the path of the file of the logs
 
 ```
-```
+
 ./script.sh -p pyrebox/malware/ALINA_MOD.zip -m ALINA_MOD.exe -l pyrebox/logs/function_calls.log
 
 ./script.sh -p pyrebox/malware/ALINA_MOD.zip -m ALINA_MOD.exe
-```

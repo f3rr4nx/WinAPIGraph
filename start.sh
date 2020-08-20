@@ -1,4 +1,29 @@
 #!/bin/bash
+# -------------------------------------------------------------------------
+#
+#     Copyright (C) 2020  Fernando Heras Díez
+#
+#     This program is free software: you can redistribute it and/or modify
+#     it under the terms of the GNU General Public License as published by
+#     the Free Software Foundation, either version 3 of the License, or
+#     (at your option) any later version.
+#
+#     This program is distributed in the hope that it will be useful,
+#     but WITHOUT ANY WARRANTY; without even the implied warranty of
+#     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#     GNU General Public License for more details.
+#
+#     You should have received a copy of the GNU General Public License
+#     along with this program.  If not, see <https://www.gnu.org/licenses/>.
+#
+# -------------------------------------------------------------------------
+
+
+BASEDIR=$(dirname "$0")
+PYTHON_BIN=/usr/bin/python3
+file=pyrebox/mw_monitor_run.json
+path_wm='C:\\Users\\Fernando\\Desktop'
+
 
 while test $# -gt 0; do
         case "$1" in
@@ -17,6 +42,7 @@ while test $# -gt 0; do
                 -p)
                         shift
                         if test $# -gt 0; then
+
                                 path_malware=$1
                         else
                                 echo "no path malware specified"
@@ -56,22 +82,6 @@ while test $# -gt 0; do
                         logs=`echo $1 | sed -e 's/^[^=]*=//g'`
                         shift
                         ;;
-                -i)
-                        shift
-                        if test $# -gt 0; then
-                                image=$1
-                                snapshot=$2
-                        else
-                                echo "no output dir specified"
-                                exit 1
-                        fi
-                        shift
-                        ;;
-                --image*)
-                        image=`echo $1 | sed -e 's/^[^=]*=//g'`
-                        snapshot=$2
-                        shift
-                        ;;
                 *)
                         break
                         ;;
@@ -82,20 +92,16 @@ if [ -z "$logs" ]; then
    logs=pyrebox/logs/function_calls.log
 fi
 
-BASEDIR=$(dirname "$0")
-file=pyrebox/mw_monitor_run.json
-path_wm='C:\\Users\\Fernando\\Desktop'
 
-
-python3 -c "import sys, json; jsonFile = open('$file', 'r')
+${PYTHON_BIN} -c "import sys, json; jsonFile = open('$file', 'r')
 data = json.load(jsonFile)
 jsonFile.close() # Close the JSON file
 
 ## Working with buffered content
 path = {
         'files_path': '$path_wm',
-        'main_executable': '$malware',
-        'files_bundle': '$BASEDIR$path_malware'
+        'main_executable': '$BASEDIR/$malware',
+        'files_bundle': '$BASEDIR/$path_malware'
     }
 tmp = data['general'] 
 data['general'] = path
@@ -105,18 +111,10 @@ jsonFile = open('$file', 'w+')
 jsonFile.write(json.dumps(data, indent=4))
 jsonFile.close()
 "
-if [ -z "$snapshot" ]
-then
-    echo hola
-    snapshot=""
-else
-    snapshot="-loadvm $snapshot"
-fi
-
-cd pyrebox
+pushd \pyrebox 
 source pyrebox_venv/bin/activate
-$BASEDIR/pyrebox-i386 -m 256 -monitor stdio -usb -device usb-tablet -drive file=$image,index=0,media=disk,format=qcow2,cache=unsafe -netdev user,id=network0,smb=/samba/ -device rtl8139,netdev=network0 ${snapshot}
+./pyrebox-i386 -m 8192 -monitor stdio -usb -device usb-tablet -drive file=images/Win7/Win7x32.qcow2,index=0,media=disk,format=qcow2,cache=unsafe -netdev user,id=network0,smb=/samba/ -device rtl8139,netdev=network0 -loadvm alina
 
-cd ..
-cd py2Graph
- python3 py2graph.py -f $BASEDIR./$logs
+popd
+pushd \WinAPIGraph 
+${PYTHON_BIN} WinAPIGraph.py -f $BASEDIR./$logs

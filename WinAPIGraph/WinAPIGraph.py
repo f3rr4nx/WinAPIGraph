@@ -1,18 +1,23 @@
 #!/usr/bin/env bash
+# -------------------------------------------------------------------------
+#
+#     Copyright (C) 2020  Fernando Heras Díez
+#
+#     This program is free software: you can redistribute it and/or modify
+#     it under the terms of the GNU General Public License as published by
+#     the Free Software Foundation, either version 3 of the License, or
+#     (at your option) any later version.
+#
+#     This program is distributed in the hope that it will be useful,
+#     but WITHOUT ANY WARRANTY; without even the implied warranty of
+#     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#     GNU General Public License for more details.
+#
+#     You should have received a copy of the GNU General Public License
+#     along with this program.  If not, see <https://www.gnu.org/licenses/>.
+#
+# -------------------------------------------------------------------------
 
-#This script is provided as an example of a possible QEMU / Pyrebox configuration
-#for a Windows 7 SP 0 64 bit analysis target.
-
-#It assumes that pyrebox.conf.Win7SP0x64 exists, and contains the list
-#of scripts to be loaded on startup, as well as the configuration parameter
-#that indicates Volatility the profile to apply.
-
-#The QEMU parameters specified will start a VM with:
-#   * 512 MiB of RAM
-#   * Usb support
-#   * A main hard-drive, provided as a qcow2 image as the first parameter for the script
-#   * Starts a VNC server on 127.0.0.1 for showing the system display
-#   * Redirects the QEMU monitor to stdio (only configuration supported currently)
 
 from py2neo import Graph,Node,Relationship,database
 import ast
@@ -35,9 +40,7 @@ pid=0
 """
 def authenticateAndConnect():
     config = configparser.ConfigParser()        
-    config.read('cfg.ini')
-
-    print (config.sections())
+    config.read('config.ini')
     connection = config['Neo4j']['connection']
     user = config['Neo4j']['user']
     passw = config['Neo4j']['pass']
@@ -372,7 +375,7 @@ class Type_Func():
             name_api_ini = name_api.lower() + ".ini"
             config = configparser.ConfigParser()
             
-            config.read('cfg.ini')
+            config.read('config.ini')
 
             api_path = config['Apis']['file_api']
             if config.read(api_path + name_api_ini):
@@ -514,8 +517,8 @@ def menu():
 
     if args.file:
         if path.exists(args.file):
-            fichero = Read_File(args.file)
-            lista_func_kernel=fichero.read()
+            logs_api = Read_File(args.file)
+            lista_func_kernel=logs_api.read()
         else:
             print("The fild" + args.file + "is not found")       
     else:
