@@ -31,7 +31,7 @@ and the VM is closed the process of network creation will start, for this it is 
 to have the neo4j database active. The script can be started through ``start.sh``.
 
 `WinAPIGraph` can also be run separately by simply entering the address where 
-the log is located, from which we want to generate the network. ``python3 `WinAPIGraph`.py``.
+the log is located, from which we want to generate the network. ``python3 WinAPIGraph.py``.
 
 
 
