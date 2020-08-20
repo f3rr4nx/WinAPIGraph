@@ -1,7 +1,7 @@
 # WinAPIGraph
 
 `WinAPIGraph` is a program based on neo4j, for the creation of software behavior graphs. 
-`WinAPIGraph` uses the PyREBox sandbox to perform a dynamic analysis of the software 
+`WinAPIGraph` uses the [PyREBox](https://github.com/Cisco-Talos/pyrebox) sandbox to perform a dynamic analysis of the software 
 and to obtain the trace of the API calls made by the software.
 
 Deviare2_db is a widely used database containing the main APIs used by the programs. 
