@@ -29,10 +29,6 @@ import Sqlite3
 `WinAPIGraph` starts a VM through PyREBox, once all the malware analysis is executed 
 and the VM is closed the process of network creation will start, for this it is necessary 
 to have the neo4j database active. The script can be started through ``start.sh``.
-
-`WinAPIGraph` can also be run separately by simply entering the address where 
-the log is located, from which we want to generate the network. ``python3 WinAPIGraph.py``.
-
 ```
 ---------------------------------
 Usage
@@ -46,6 +42,22 @@ Options:
 
 ```
 
+
+`WinAPIGraph` can also be run separately by simply entering the address where 
+the log is located, from which we want to generate the network. ``python3 `WinAPIGraph`.py``.
+
+```
+---------------------------------
+Usage
+---------------------------------
+
+Options:
+    -h, --help show brief help"
+    -f, --file=PATH  specify the path of the file of the logs
+
+```
+```
 ./script.sh -p pyrebox/malware/ALINA_MOD.zip -m ALINA_MOD.exe -l pyrebox/logs/function_calls.log
 
 ./script.sh -p pyrebox/malware/ALINA_MOD.zip -m ALINA_MOD.exe
+```
