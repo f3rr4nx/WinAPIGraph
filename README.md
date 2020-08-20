@@ -45,7 +45,7 @@ Options:
 
 
 `WinAPIGraph` can also be run separately by simply entering the address where 
-the log is located, from which we want to generate the network. ``python3 `WinAPIGraph`.py``.
+the log is located, from which we want to generate the network. ``python3 WinAPIGraph.py``.
 
 ```
 ---------------------------------
