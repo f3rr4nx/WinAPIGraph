@@ -33,8 +33,18 @@ to have the neo4j database active. The script can be started through ``start.sh`
 `WinAPIGraph` can also be run separately by simply entering the address where 
 the log is located, from which we want to generate the network. ``python3 WinAPIGraph.py``.
 
+```
+---------------------------------
+Usage
+---------------------------------
 
+Options:
+    -h, --help show brief help"
+    -p, --path-malware=PATH  specify the path of the malware to be analyzed"
+    -m, --malware=MALWARE specify a malware to analyze"
+    -l, --path-logs=PATH  specify the path of the logs to generate a graph (DEFAULT:pyrebox/logs/function_calls.log)"
 
+```
 
 ./script.sh -p pyrebox/malware/ALINA_MOD.zip -m ALINA_MOD.exe -l pyrebox/logs/function_calls.log
 
