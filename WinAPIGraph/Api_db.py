@@ -36,6 +36,7 @@ def create_connection(db_file):
 
     return conn
 
+
 def select_args_by_priority(conn, priority_api,priority_func):
     """
     Query tasks by priority
@@ -45,11 +46,8 @@ def select_args_by_priority(conn, priority_api,priority_func):
     """
     cur = conn.cursor()
 
-    cur.execute("SELECT Functions.id FROM Modules JOIN ModulesFuncs ON Modules.id = ModulesFuncs.ModId JOIN Functions ON Functions.id = ModulesFuncs.FuncId WHERE Modules.name LIKE ? And Functions.Name=?", ('%'+priority_api+'%',priority_func))
-    rows = cur.fetchall()
-    for row in rows:
-        id = row[0]
-    cur.execute("SELECT FunctionsArgs.name FROM FunctionsArgs WHERE FunctionsArgs.FuncId =?", (id,))
+    select_statement = """SELECT FunctionsArgs.name FROM FunctionsArgs WHERE FunctionsArgs.FuncId in (SELECT Functions.id FROM Modules JOIN ModulesFuncs ON Modules.id = ModulesFuncs.ModId JOIN Functions ON Functions.id = ModulesFuncs.FuncId WHERE Modules.name LIKE '{}' And Functions.Name='{}')""".format('%'+priority_api+'%',priority_func)
+    cur.execute(select_statement)
     rows = cur.fetchall()
     return rows
     
@@ -82,22 +80,8 @@ def select_functions_by_priority(conn, priority_api,priority_func):
 
 
 
-def select_all_tasks(conn):
-    """
-    Query all rows in the tasks table
-    :param conn: the Connection object
-    :return:
-    """
-    cur = conn.cursor()
-    cur.execute("SELECT * FROM Functions")
-
-    rows = cur.fetchall()
-
-    for row in rows:
-        print(row)
-
 def Conect_db():
-    database = r"/home/fernando/Escritorio/neo4j/pip_neo4j/ficheros_api/deviare2_db/deviare32_populated.sqlite"
+    database = r"/home/fernando/Escritorio/rep_prueba/WinAPIGraph/WinAPIGraph/API_Files/deviare2_db/deviare32_populated.sqlite"
 
     # create a database connection
     conn = create_connection(database)
@@ -105,37 +89,6 @@ def Conect_db():
 
 if __name__ == '__main__':
     conn = Conect_db()
-    p = select_functions_by_priority(conn,"ntdll.dll","NtQueryInformationProcess")
+    p = select_functions_by_priority(conn,"ntdll.dll","NtQueryInformation")
     x = select_args_by_priority(conn,"ntdll.dll","NtQueryInformationProcess")
-    if p is True:
-        print("solo encontro uno")
-    elif not p:
-        print("no encontro ninguno")
-    else:
-        print("Encontro varios")
-# Initialize API doc database. We need to initialize it in this thread (callback),
-# because sqlite limits db access to 1 thread, and the rest of callbacks should be
-# running on this same thread.
-#conn = create_connection("~/Escritorio/pyrebox/mw_monitor/third_party/deviare2_db/deviare32_populated.sqlite")
-#select_all_tasks(conn)
-
-# Didn't find any GetProcAddress function in the kernel32.dll api.
-# Didn't find any CreateMutexA function in the kernel32.dll api.
-# Didn't find any CreateMutexA function in the kernel32.dll api.
-# Didn't find any OpenProcessToken function in the KERNELBASE.dll api.
-# Didn't find any OpenProcessToken function in the KERNELBASE.dll api.
-# Didn't find any GetProcAddress function in the kernel32.dll api.
-# Didn't find any GetProcAddress function in the kernel32.dll api.
-# Didn't find any GetProcAddress function in the kernel32.dll api.
-# Didn't find any GetProcAddress function in the kernel32.dll api.
-# Didn't find any GetProcAddress function in the kernel32.dll api.
-# Didn't find any GetProcAddress function in the kernel32.dll api.
-# Didn't find any GetProcAddress function in the kernel32.dll api.
-# Didn't find any GetProcAddress function in the kernel32.dll api.
-# Didn't find any GetProcAddress function in the kernel32.dll api.
-# Didn't find any GetProcAddress function in the kernel32.dll api.
-# Didn't find any GetProcAddress function in the kernel32.dll api.
-# Didn't find any GetProcAddress function in the kernel32.dll api.
-# Didn't find any GetProcAddress function in the kernel32.dll api.
-# Didn't find any NtQueryInformationProcess function in the ntdll.dll api.
-# Didn't find any NtQueryInformationProcess function in the ntdll.dll api.
+    print(x)

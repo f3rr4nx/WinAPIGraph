@@ -1,17 +1,11 @@
 # WinAPIGraph
 
-`WinAPIGraph` is a program based on neo4j, for the creation of software behavior graphs. 
-`WinAPIGraph` uses the PyREBox sandbox to perform a dynamic analysis of the software 
-and to obtain the trace of the API calls made by the software.
-
-Deviare2_db is a widely used database containing the main APIs used by the programs. 
-`WinAPIGraph` will use this database to check that the DLLs, functions and arguments 
-entered in the system are correct.
-
-A bash script is also included for the automation of the whole system to which 
-the malware to be analyzed must be introduced as well as the path to the compressed 
-malware and optionally an address to which the log obtained will be written and which 
-will later be used by `WinAPIGraph` to generate the network.
+`WinAPIGraph` is a program based on neo4j, for the creation of software behavior graphs. `WinAPIGraph` uses the PyREBox sandbox to perform a dynamic analysis of the software and to obtain the trace of the API calls made by the software. 
+The first thing to be done is to connect to the Neo4j database, once connected we proceed to read the log file provided by PyREBox.
+Once the functions extracted from the analysis are read, they are processed by comparing them with the configuration files in the API_FILE directory. If they are found, this function and the arguments are compared with the Deviare2 database.
+Deviare2_db is a widely used database containing the main APIs used by the programs. We will use this database to check that the DLLs, functions and arguments entered into the system are correct.
+Once all the checks are done we can proceed to generate the network.
+A bash script is also included for the automation of the whole system to which the malware to be analyzed must be introduced as well as the path to the compressed malware. Optionally, an address to which the obtained log will be written can be included and later `WinAPIGraph` will use it to generate the network.
 
 
 # Install
@@ -57,6 +51,10 @@ Options:
     -f, --file=PATH  specify the path of the file of the logs
 
 ```
+![alt text](git@github.com:f3rr4nx/WinAPIGraph.git/docs/media/WinAPI.png?raw=true)
+
+
+![alt text](git@github.com:f3rr4nx/WinAPIGraph.git/docs/media/graph.png?raw=true)
 
 ./script.sh -p pyrebox/malware/ALINA_MOD.zip -m ALINA_MOD.exe -l pyrebox/logs/function_calls.log
 

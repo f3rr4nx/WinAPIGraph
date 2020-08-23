@@ -39,8 +39,8 @@ pid=0
         auth=("name","password")
 """
 def authenticateAndConnect():
-    config = configparser.ConfigParser()        
-    config.read('config.ini')
+    config = configparser.ConfigParser()    
+    config.read('config.ini')    
     connection = config['Neo4j']['connection']
     user = config['Neo4j']['user']
     passw = config['Neo4j']['pass']
@@ -352,7 +352,6 @@ class Type_Func():
         id_functions += id_functions + 1
     
     def type_func(self):
-        import configparser
         global id_functions
 
         conn = Api_db.Conect_db()
