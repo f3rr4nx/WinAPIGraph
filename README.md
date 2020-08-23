@@ -51,10 +51,10 @@ Options:
     -f, --file=PATH  specify the path of the file of the logs
 
 ```
-![alt text](git@github.com:f3rr4nx/WinAPIGraph.git/docs/media/WinAPI.png?raw=true)
+![alt text](git@github.com:f3rr4nx/WinAPIGraph.git/docs/media/WinAPI.png?style=centerme)
 
 
-![alt text](git@github.com:f3rr4nx/WinAPIGraph.git/docs/media/graph.png?raw=true)
+![alt text](git@github.com:f3rr4nx/WinAPIGraph.git/docs/media/graph.png?style=centerme)
 
 ./script.sh -p pyrebox/malware/ALINA_MOD.zip -m ALINA_MOD.exe -l pyrebox/logs/function_calls.log
 
