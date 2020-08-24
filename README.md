@@ -69,7 +69,7 @@ Options:
 the log is located, from which we want to generate the network.
 
 ```bash
-python3 WinAPIGraph.py -f /Your/path
+python3 WinAPIGraph.py -f /Your/path/function_calls.log
 ```
 
 We start the process and obtain the resulting network
