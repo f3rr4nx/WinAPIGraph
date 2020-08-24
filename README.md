@@ -44,7 +44,7 @@ Options:
 
 `WinAPIGraph` starts a VM through PyREBox, once all the malware analysis is executed 
 and the VM is closed the process of network creation will start, for this it is necessary 
-to have the neo4j database active. The script can be started through ``start.sh``.
+to have the neo4j database active. The script can be started through ``PyRLogToGraph.sh``.
 
 ```
 ---------------------------------
@@ -59,9 +59,9 @@ Options:
 
 ```
 ```bash
-./script.sh -p  /Your/path/malware.zip -m malware.exe
+./PyRLogToGraph.sh -p  /Your/path/malware.zip -m malware.exe
 
-./script.sh -p /Your/path/malware.zip -m malware.exe -l /Your/path/function_calls.log
+./PyRLogToGraph.sh -p /Your/path/malware.zip -m malware.exe -l /Your/path/function_calls.log
 ```
 
 
