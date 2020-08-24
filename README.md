@@ -2,7 +2,7 @@
 
 `WinAPIGraph` is a program based on neo4j, for the generation of software behaviour graphs. `WinAPIGraph` uses the PyREBox sandbox to perform a dynamic analysis of the software and to obtain the trace of the API calls made by the software. 
 
-The first thing to be done is to connect to the Neo4j database, once connected we proceed to read the log file provided by PyREBox.
+The first thing to do is to connect to the Neo4j database, once connected we proceed to read the log file provided by PyREBox.
 Once the functions extracted from the analysis are read, they are processed by comparing them with the configuration files in the API_FILE directory. If they are found, this function and the arguments are compared with the Deviare2 database.
 Deviare2_db is a widely used database containing the main APIs used by the programs. We will use this database to check that the DLLs, functions and arguments entered into the system are correct.
 
