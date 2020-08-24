@@ -1,10 +1,10 @@
 # WinAPIGraph
 
-`WinAPIGraph` is a program based on neo4j, for the generation of software behaviour graphs. `WinAPIGraph` uses the [PyREBox sandbox](https://github.com/Cisco-Talos/pyrebox.git) to perform a dynamic analysis of the software and to obtain the trace of the API calls made by the software. 
+`WinAPIGraph` is a program based on neo4j for the generation of software behaviour graphs. `WinAPIGraph` uses the [PyREBox sandbox](https://github.com/Cisco-Talos/pyrebox.git) to perform a dynamic analysis of the software and to obtain the trace of the API calls made by the software. 
 
-The first thing to do is to connect to the Neo4j database, once connected we proceed to read the log file provided by PyREBox.
+The first thing to do is to connect to the Neo4j database. Once connected we proceed to read the log file provided by PyREBox.
 Once the functions extracted from the analysis are read, they are processed by comparing them with the configuration files in the [API_FILE](/WinAPIGraph/API_Files/) directory. If they are found, this function and the arguments are compared with the [Deviare2 database](https://github.com/nektra/Deviare2.git).
-Deviare2_db is a widely used database containing the main APIs used by the programs. We will use this database to check that the DLLs, the functions and the arguments entered into the system are correct.
+Deviare2_db is a widely used database that contains the main APIs used by the programs. We will use this database to check that the DLLs, the functions and the arguments entered into the system are correct.
 
 Once all the checks are done we can proceed to generate the network.
 A bash script is also included for the automation of the whole system to which the malware to be analyzed must be introduced as well as the path to the compressed malware. Optionally, an address to which the obtained log will be written can be included and later `WinAPIGraph` will use it to generate the network.
