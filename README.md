@@ -79,6 +79,5 @@ We start the process and obtain the resulting network
 
 
 ## License
-[LICENSE](LICENSE)
-
+Licensed under the [GNU GPLv3](LICENSE) license.
 
