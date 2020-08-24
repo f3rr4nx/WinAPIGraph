@@ -79,5 +79,5 @@ We start the process and obtain the resulting network
 
 
 ## License
-Licensed under the [GNU GPLv3](LICENSE) license.
+This tool is published under the [GNU GPLv3](LICENSE) license.
 
