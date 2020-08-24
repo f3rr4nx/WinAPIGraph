@@ -408,14 +408,14 @@ class Type_Func():
                         else:
                             print("La función " + self.func + " tiene un argumento incorrecto. (" + handle + ")")
                 else:
-                    pass#("The function " + self.func + " is not available. Please make sure that it is induced into the system.")
+                    print("The function " + self.func + " is not available. Please make sure that it is induced into the system.")
             else:
-                pass#print("The Api " + self.api + " is not available. Please make sure that it is induced into the system.")
+                print("The Api " + self.api + " is not available. Please make sure that it is induced into the system.")
 
         if not var:            
-            pass#print("Didn't find any " + self.func + " function in the " + self.api + " api.")
+            print("Didn't find any " + self.func + " function in the " + self.api + " api.")
         else:
-            pass#print("Found several functions similar to " + self.func + " please enter one of them for the system to process.")
+            print("Found several functions similar to " + self.func + " please enter one of them for the system to process.")
         
         
                     
@@ -435,8 +435,6 @@ class Read_File:
                 if 'Process (PID:' in line:
                     global pid
                     line_r,pid=line.split(')')
-
-                #Obtenemos la linea en la que esta el proceso obtenido
                 elif '-->' in line :
                     line_r=line.split('-->')
                     api = line_r[1].replace("]",'').replace("[",'').replace(" ",'')
@@ -511,10 +509,6 @@ def banner():
                 
 
 def menu():
-
-    # metavar gives name to the expected value 
-    # in error and help outputs
-
     parser = argparse.ArgumentParser()
     
     parser.add_argument('-f', '--file', required=False, help="File to use")
@@ -537,9 +531,5 @@ if __name__ == '__main__':
     graph = authenticateAndConnect()
     banner()
     menu()
-    # dirFichero="/home/fernando/Escritorio/pyrebox/logs/Aliana_mod/function_calls.log"
-    # fichero = Read_File(dirFichero)
-    # lista_func_kernel=fichero.read()
-
     
 
